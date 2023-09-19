@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class OBJ_KEY extends SuperObject {
 
   public OBJ_KEY() {
-    name = "key";
+    name = "Key";
 
     try {
       image = ImageIO.read(getClass().getResourceAsStream("../res/objects/key.png"));

@@ -113,6 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
     tileM.draw(g2);
 
     // OBJECT
+
     for (int i = 0; i < obj.length; i++) {
       if (obj[i] != null) {
         obj[i].draw(g2, this);
