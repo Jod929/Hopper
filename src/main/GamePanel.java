@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -41,8 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
   // ENTITY AND OBJECTS
   public Player player = new Player(this, keyH);
   public SuperObject obj[] = new SuperObject[10];
-
-
+  public Entity npc[] = new Entity[10];
 
   public GamePanel() {
 
@@ -56,7 +56,8 @@ public class GamePanel extends JPanel implements Runnable {
   public void setUpGame() {
 
     aSetter.setObject();
-    playMusic(0);
+    aSetter.setNPC();
+    // playMusic(0);
   }
 
   public void startGameThread() {
@@ -104,6 +105,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     player.update();
 
+    for (int i = 0; i < npc.length; i++) {
+      if (npc[i] != null) {
+        npc[i].update();
+      }
+    }
+
   }
 
   public void paintComponent(Graphics g) {
@@ -125,6 +132,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     // PLAYER
     player.draw(g2);
+
+    // NPC
+
+    for (int i = 0; i < npc.length; i++) {
+      if (npc[i] != null) {
+        npc[i].draw(g2);
+      }
+    }
 
     g2.dispose();
   }

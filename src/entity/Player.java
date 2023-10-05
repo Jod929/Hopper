@@ -12,19 +12,16 @@ import main.KeyHandler;
 
 public class Player extends Entity {
 
-  GamePanel gp;
   KeyHandler keyH;
 
   public final int screenX;
   public final int screenY;
 
-  int hasKey = 0;
-
-
 
   public Player(GamePanel gp, KeyHandler keyH) {
 
-    this.gp = gp;
+    super(gp);
+
     this.keyH = keyH;
 
     screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
@@ -97,8 +94,8 @@ public class Player extends Entity {
 
       // CHECK OBJECT COLLISON
 
-      int objIndex = gp.collisionChecker.checkObject(this, true);
-      pickUpObject(objIndex);
+      // int objIndex = gp.collisionChecker.checkObject(this, true);
+      // pickUpObject(objIndex);
 
 
       // IF COLLISION IS FALSE, PLAYER CAN MOVE
@@ -134,33 +131,33 @@ public class Player extends Entity {
 
   }
 
-  public void pickUpObject(int i) {
+  // public void pickUpObject(int i) {
 
-    if (i != 999) {
+  //   if (i != 999) {
 
-      String objectName = gp.obj[i].name;
+  //     String objectName = gp.obj[i].name;
 
-      switch (objectName) {
-        case "Key":
-          hasKey++;
-          gp.obj[i] = null;
-          System.out.println("Key: " + hasKey);
-          break;
-        case "Door":
-          if (hasKey > 0) {
-            gp.obj[i] = null;
-            hasKey--;
-          }
-          System.out.println("Key: " + hasKey);
-          break;
-        case "Boots":
-          gp.obj[i] = null;
-          speed += 2;
-          break;
-      }
-    }
+  //     switch (objectName) {
+  //       case "Key":
+  //         hasKey++;
+  //         gp.obj[i] = null;
+  //         System.out.println("Key: " + hasKey);
+  //         break;
+  //       case "Door":
+  //         if (hasKey > 0) {
+  //           gp.obj[i] = null;
+  //           hasKey--;
+  //         }
+  //         System.out.println("Key: " + hasKey);
+  //         break;
+  //       case "Boots":
+  //         gp.obj[i] = null;
+  //         speed += 2;
+  //         break;
+  //     }
+  //   }
 
-  }
+  // }
 
 
   public void draw(Graphics2D g2) {
