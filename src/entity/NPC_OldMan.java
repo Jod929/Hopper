@@ -9,11 +9,13 @@ import main.GamePanel;
 
 public class NPC_OldMan extends Entity {
 
+  public boolean isHit;
+
   public NPC_OldMan(GamePanel gp) {
     super(gp);
 
-    direction = "left";
-    speed = 1;
+    // direction = "left";
+    // speed = 1;
 
     getImage();
   }
@@ -34,6 +36,24 @@ public class NPC_OldMan extends Entity {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+  }
+
+  public void updateNPC(Entity entity, Player player) {
+    System.out.println("being called in updateNPC");
+    System.out.println("entity " + entity);
+    System.out.println("player " + player);
+
+    // entity.stopNPC = true;
+
+    isHit = gp.collisionChecker.checkMonsterHit(entity, player, true);
+
+    if (isHit == true) {
+      entity.stopNPC = true;
+    }
+
+
+    System.out.println("EntityStopNPC " + entity.stopNPC);
 
   }
 

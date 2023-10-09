@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+
 import entity.NPC_OldMan;
 // import object.OBJ_BOOTS;
 // import object.OBJ_CHEST;
@@ -20,10 +22,31 @@ public class AssetSetter {
 
   public void setNPC() {
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 1; i++) {
       gp.npc[i] = new NPC_OldMan(gp);
-      gp.npc[i].worldX = gp.tileSize * 21 + (i + 5);
-      gp.npc[i].worldY = gp.tileSize * 21 + (i + 5);
+
+      Random sideRandom = new Random();
+      int side = sideRandom.nextInt(2);
+
+      Random speedRandom = new Random();
+      int speed = speedRandom.nextInt(1, 4);
+
+      if (side == 1) {
+        // RIGHT
+        gp.npc[i].worldX = gp.tileSize * 21 + (5 * 50);
+        gp.npc[i].worldY = gp.tileSize * 10 + (i * 50);
+        gp.npc[i].direction = "left";
+      } else {
+        // LEFT
+        gp.npc[i].worldX = gp.tileSize * 21 + (5 * -50);
+        gp.npc[i].worldY = gp.tileSize * 10 + (i * 50);
+        gp.npc[i].direction = "right";
+      }
+
+      gp.npc[i].speed = speed;
+      // gp.npc[i].collision = true;
+
+
     }
 
     // gp.npc[0] = new NPC_OldMan(gp);

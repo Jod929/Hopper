@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
 
 public class CollisionChecker {
 
@@ -13,6 +14,8 @@ public class CollisionChecker {
 
   public void checkTile(Entity entity) {
     //              starting_player_spot_x +       8
+
+
     int entityLeftWorldX = entity.worldX + entity.solidArea.x;
     int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
     int entityTopWorldY = entity.worldY + entity.solidArea.y;
@@ -144,5 +147,172 @@ public class CollisionChecker {
 
     return index;
   }
+
+  public boolean checkMonsterHit(Entity entity, Player player, boolean hit) {
+
+    entity.solidArea.x = entity.worldX + entity.solidArea.x;
+    entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+    // get the objects solid area position
+    player.solidArea.x = player.worldX + player.solidArea.x;
+    player.solidArea.y = player.worldY + player.solidArea.y;
+
+    switch (entity.direction) {
+      case "up":
+        entity.solidArea.y -= entity.speed;
+        if (entity.solidArea.intersects(player.solidArea)) {
+          if (player.collision == true) {
+            entity.collisionOn = true;
+            entity.stopNPC = true;
+          }
+
+          if (hit == true) {
+            // index = i;
+          }
+        }
+        break;
+      case "down":
+        entity.solidArea.y += entity.speed;
+        if (entity.solidArea.intersects(player.solidArea)) {
+          if (player.collision == true) {
+            entity.collisionOn = true;
+            entity.stopNPC = true;
+          }
+
+          if (hit == true) {
+            // index = i;
+          }
+        }
+        break;
+      case "left":
+        entity.solidArea.x -= entity.speed;
+
+        if (entity.solidArea.intersects(player.solidArea)) {
+          if (player.collision == true) {
+            entity.collisionOn = true;
+            entity.stopNPC = true;
+          }
+
+          if (hit == true) {
+            // index = i;
+            System.out.println("HIT GOING LEFT");
+            return true;
+          }
+        }
+        break;
+      case "right":
+        entity.solidArea.x += entity.speed;
+
+        if (entity.solidArea.intersects(player.solidArea)) {
+          if (player.collision == true) {
+            entity.collisionOn = true;
+            entity.stopNPC = true;
+          }
+
+          if (hit == true) {
+            // index = i;
+            System.out.println("HIT GOING RIGHT");
+            return true;
+          }
+        }
+        break;
+    }
+
+    entity.solidArea.x = entity.solidAreaDefaultX;
+    entity.solidArea.y = entity.solidAreaDefaultY;
+    player.solidArea.x = player.solidAreaDefaultX;
+    player.solidArea.y = player.solidAreaDefaultY;
+
+    return false;
+
+  }
+
+    // int index = 999;
+
+    // for (int i = 0; i < gp.npc.length; i++) {
+    //   if (gp.npc[i] != null) {
+
+    //     // need to get the players solid area position and the entity solid area positio
+    //     // and compare those
+
+    //     // get entitys solid area position
+    //     entity.solidArea.x = entity.worldX + entity.solidArea.x;
+    //     entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+    //     // get the objects solid area position
+    //     gp.npc[i].solidArea.x = gp.npc[i].worldX + gp.npc[i].solidArea.x;
+    //     gp.npc[i].solidArea.y = gp.npc[i].worldY + gp.npc[i].solidArea.y;
+
+    //     switch (entity.direction) {
+    //       case "up":
+    //         entity.solidArea.y -= entity.speed;
+    //         if (entity.solidArea.intersects(gp.npc[i].solidArea)) {
+    //           if (gp.npc[i].collision == true) {
+    //             entity.collisionOn = true;
+    //             entity.stopNPC = true;
+    //           }
+
+    //           if (player == true) {
+    //             index = i;
+    //           }
+    //         }
+    //         break;
+    //       case "down":
+    //         entity.solidArea.y += entity.speed;
+    //         if (entity.solidArea.intersects(gp.npc[i].solidArea)) {
+    //           if (gp.npc[i].collision == true) {
+    //             entity.collisionOn = true;
+    //             entity.stopNPC = true;
+    //           }
+
+    //           if (player == true) {
+    //             index = i;
+    //           }
+    //         }
+    //         break;
+    //       case "left":
+    //         entity.solidArea.x -= entity.speed;
+
+    //         System.out.println("working in CC left");
+
+    //         if (entity.solidArea.intersects(gp.npc[i].solidArea)) {
+    //           if (gp.npc[i].collision == true) {
+    //             entity.collisionOn = true;
+    //             entity.stopNPC = true;
+    //           }
+
+    //           if (player == true) {
+    //             index = i;
+    //           }
+    //         }
+    //         break;
+    //       case "right":
+    //         entity.solidArea.x += entity.speed;
+
+    //         System.out.println("working in right");
+
+    //         if (entity.solidArea.intersects(gp.npc[i].solidArea)) {
+    //           if (gp.npc[i].collision == true) {
+    //             entity.collisionOn = true;
+    //             entity.stopNPC = true;
+    //           }
+
+    //           if (player == true) {
+    //             index = i;
+    //           }
+    //         }
+    //         break;
+    //     }
+
+    //     entity.solidArea.x = entity.solidAreaDefaultX;
+    //     entity.solidArea.y = entity.solidAreaDefaultY;
+    //     gp.npc[i].solidArea.x = gp.npc[i].solidAreaDefaultX;
+    //     gp.npc[i].solidArea.y = gp.npc[i].solidAreaDefaultY;
+
+    //   }
+    // }
+
+    // return index;
+  // }
 
 }

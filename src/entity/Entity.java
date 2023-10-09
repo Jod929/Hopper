@@ -23,6 +23,9 @@ public class Entity {
   public int solidAreaDefaultX, solidAreaDefaultY;
   public boolean collisionOn = false;
 
+  public boolean collision = false;
+  public boolean stopNPC = false;
+
   public int actionLockCounter = 0;
 
   public Entity(GamePanel gp) {
@@ -30,15 +33,25 @@ public class Entity {
   }
 
   public void setAction() {}
+  public void updateNPC(Entity entity, Player player) {}
 
   public void update() {
 
-    setAction();
+    // setAction();
 
+    // CHECK TILE COLLISION
     collisionOn = false;
     gp.collisionChecker.checkTile(this);
 
-    if (collisionOn == false) {
+
+    // CHECK NPC COLLISION:
+    // stopNPC = false;
+    // gp.collisionChecker.checkMonsterHit(this, true);
+
+    System.out.println("stopNPC " + stopNPC);
+    System.out.println("collisionOn " + collisionOn);
+
+    if (collisionOn == false && stopNPC == false) {
       switch(direction) {
         case "up":
           worldY -= speed;
@@ -117,6 +130,10 @@ public class Entity {
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 
     }
+  }
+
+  public void checkNPCPosition(Entity entity, Player player) {
+    updateNPC(entity, player);
   }
 
 }
