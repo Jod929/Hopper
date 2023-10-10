@@ -44,6 +44,9 @@ public class GamePanel extends JPanel implements Runnable {
   public SuperObject obj[] = new SuperObject[10];
   public Entity npc[] = new Entity[10];
 
+  // GAME STATS
+  public boolean gameOver = false;
+
   public GamePanel() {
 
     this.setPreferredSize(new Dimension(screenWidth, screenHeight));

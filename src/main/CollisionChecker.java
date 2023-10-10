@@ -195,7 +195,7 @@ public class CollisionChecker {
 
           if (hit == true) {
             // index = i;
-            System.out.println("HIT GOING LEFT");
+            // System.out.println("HIT GOING LEFT");
             return true;
           }
         }
@@ -211,7 +211,7 @@ public class CollisionChecker {
 
           if (hit == true) {
             // index = i;
-            System.out.println("HIT GOING RIGHT");
+            // System.out.println("HIT GOING RIGHT");
             return true;
           }
         }

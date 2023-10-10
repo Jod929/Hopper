@@ -48,9 +48,6 @@ public class Entity {
     // stopNPC = false;
     // gp.collisionChecker.checkMonsterHit(this, true);
 
-    System.out.println("stopNPC " + stopNPC);
-    System.out.println("collisionOn " + collisionOn);
-
     if (collisionOn == false && stopNPC == false) {
       switch(direction) {
         case "up":

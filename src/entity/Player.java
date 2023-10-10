@@ -16,6 +16,9 @@ public class Player extends Entity {
 
   public final int screenX;
   public final int screenY;
+  public int score;
+  public int scoreAdder = 0;
+  public boolean gameOver = false;
 
 
   public Player(GamePanel gp, KeyHandler keyH) {
@@ -103,10 +106,15 @@ public class Player extends Entity {
         switch(direction) {
           case "up":
             worldY -= speed;
+            scoreAdder++;
+            if (scoreAdder >= gp.tileSize / 4) {
+              score++;
+              scoreAdder = 0;
+            }
             break;
-          case "down":
-            worldY += speed;
-            break;
+          // case "down":
+          //   worldY += speed;
+          //   break;
           case "left":
             worldX -= speed;
             break;
@@ -115,6 +123,8 @@ public class Player extends Entity {
             break;
         }
       }
+
+      System.out.println("score " + score);
 
       spriteCounter++;
 
@@ -130,6 +140,7 @@ public class Player extends Entity {
     }
 
   }
+
 
   // public void pickUpObject(int i) {
 
@@ -199,7 +210,15 @@ public class Player extends Entity {
         break;
     }
 
-    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+    if (gp.gameOver) {
+      g2.drawString("GAME OVER", screenX, screenY);
+      g2.drawString(Integer.toString(score), screenX, screenY + gp.tileSize);
+    } else {
+      g2.drawString(Integer.toString(score), solidAreaDefaultX + gp.tileSize * 15, solidAreaDefaultY);
+      g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+    }
+
+
 
   }
 

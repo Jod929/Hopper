@@ -40,9 +40,9 @@ public class NPC_OldMan extends Entity {
   }
 
   public void updateNPC(Entity entity, Player player) {
-    System.out.println("being called in updateNPC");
-    System.out.println("entity " + entity);
-    System.out.println("player " + player);
+    // System.out.println("being called in updateNPC");
+    // System.out.println("entity " + entity);
+    // System.out.println("player " + player);
 
     // entity.stopNPC = true;
 
@@ -50,10 +50,11 @@ public class NPC_OldMan extends Entity {
 
     if (isHit == true) {
       entity.stopNPC = true;
+      gp.gameOver = true;
     }
 
 
-    System.out.println("EntityStopNPC " + entity.stopNPC);
+    // System.out.println("EntityStopNPC " + entity.stopNPC);
 
   }
 
