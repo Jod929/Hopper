@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.JPanel;
 
 import entity.Entity;
@@ -36,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
   Sound sound = new Sound();
   public CollisionChecker collisionChecker = new CollisionChecker(this);
   public AssetSetter aSetter = new AssetSetter(this);
+  EndScreen endScreen = new EndScreen(this);
 
   Thread gameThread;
 
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
 
   // GAME STATS
   public boolean gameOver = false;
+  public int highScore;
 
   public GamePanel() {
 
@@ -123,29 +124,33 @@ public class GamePanel extends JPanel implements Runnable {
 
     Graphics2D g2 = (Graphics2D)g;
 
-    // TILE
-    tileM.draw(g2);
+    if (gameOver == false) {
 
-    // OBJECT
+      // TILE
+      tileM.draw(g2);
 
-    for (int i = 0; i < obj.length; i++) {
-      if (obj[i] != null) {
-        obj[i].draw(g2, this);
+      // OBJECT
+      for (int i = 0; i < obj.length; i++) {
+        if (obj[i] != null) {
+          obj[i].draw(g2, this);
+        }
       }
-    }
 
-    // PLAYER
-    player.draw(g2);
+      // PLAYER
+      player.draw(g2);
 
-    // NPC
-
-    for (int i = 0; i < npc.length; i++) {
-      if (npc[i] != null) {
-        npc[i].draw(g2);
+      // NPC
+      for (int i = 0; i < npc.length; i++) {
+        if (npc[i] != null) {
+          npc[i].draw(g2);
+        }
       }
-    }
 
-    g2.dispose();
+      g2.dispose();
+    } else {
+      endScreen.updateScore(highScore);
+      endScreen.draw(g2);
+    }
   }
 
   public void playMusic(int i) {

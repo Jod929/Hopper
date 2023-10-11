@@ -211,8 +211,14 @@ public class Player extends Entity {
     }
 
     if (gp.gameOver) {
+
+      if (score > gp.highScore) {
+        gp.highScore = score;
+      }
+
       g2.drawString("GAME OVER", screenX, screenY);
       g2.drawString(Integer.toString(score), screenX, screenY + gp.tileSize);
+      g2.drawString("High Score " + Integer.toString(score), solidAreaDefaultX, solidAreaDefaultY);
     } else {
       g2.drawString(Integer.toString(score), solidAreaDefaultX + gp.tileSize * 15, solidAreaDefaultY);
       g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
